@@ -1,0 +1,49 @@
+[
+  {
+    "name": "PipelineHttp",
+    "scriptFile": "PipelineHTTP.dll",
+    "entryPoint": "CoffeeNChill.PipelineHttp.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "req",
+        "direction": "In",
+        "type": "httpTrigger",
+        "authLevel": "Function",
+        "methods": [
+          "post"
+        ],
+        "route": "pipeline",
+        "properties": {}
+      },
+      {
+        "name": "$return",
+        "type": "http",
+        "direction": "Out"
+      }
+    ]
+  },
+  {
+    "name": "PipelineQueue",
+    "scriptFile": "PipelineHTTP.dll",
+    "entryPoint": "CoffeeNChill.PipelineQueue.Run",
+    "language": "dotnet-isolated",
+    "properties": {
+      "IsCodeless": false
+    },
+    "bindings": [
+      {
+        "name": "message",
+        "direction": "In",
+        "type": "queueTrigger",
+        "dataType": "String",
+        "queueName": "pipeline-queue",
+        "connection": "AzureWebJobsStorage",
+        "properties": {}
+      }
+    ]
+  }
+]
